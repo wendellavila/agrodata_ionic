@@ -1,0 +1,107 @@
+.color-primary {
+    color: var(--ion-color-primary);
+}
+.color-light {
+    color: var(--ion-color-light);
+}
+.color-medium {
+    color: var(--ion-color-medium);
+}
+.color-dark {
+    color: var(--ion-color-dark);
+}
+.bg-primary {
+    background-color: var(--ion-color-primary);
+}
+.color-secondary {
+    color: var(--ion-color-secondary);
+}
+.appname {
+    font-size: 20px;
+    font-family: Quicksand;
+    font-weight: color-lighter;
+}
+.loginbody {
+    background-color: #f4f4f4;
+    position: relative;
+}
+.inputbox {
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    padding: 0px;
+    display: inline-block;
+    width: 100%;
+    border: 2px solid var(--ion-color-primary);;
+}
+.title {
+    margin: 5px;
+    font-size: 35px;
+}
+.subtitle {
+    font-size: 18px;
+    margin-top: 0px;
+}
+.topic {
+    font-size: 16px;
+    margin-bottom: 1px;
+    margin-top: 0px;
+}
+.subtopic {
+    font-size: 12px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+.inputs {
+    font-size: 16px;
+    width: 100%;
+    margin: 0px;
+    border: 0px solid white;
+}
+.texto {
+    color: #3c3c3c;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.buttonslogin {
+    width: 80%;
+}
+.buttonsenha {
+    margin-top: 20px;
+}
+.container {
+    margin-top: 70%;
+}
+.logo {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+.errormessage {
+    color: red;
+    padding-top: 0px;
+    margin-top: 0px;
+    padding-bottom: 3px;
+    margin-bottom: 3px;
+    font-size: 14px; 
+}
+@media (min-width: 576px){
+    .buttonslogin {
+        width: 40%;
+    }
+    .container {
+        margin-top: 20%;
+    }
+    .logo {
+        width: 6%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.8%;
+        margin-bottom: 5px;
+    }
+    .inputbox {
+        width: 60%;
+    }
+}

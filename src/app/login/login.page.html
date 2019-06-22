@@ -1,0 +1,53 @@
+<ion-content>
+	<div text-center no-margin>
+		<img src="../../assets/images/logo.png" class="logo">
+	</div>
+	
+	<ion-grid>
+	    <ion-col size="12">
+			<div text-center>
+				<span text-center class="color-secondary appname">Agro</span>
+				<span text-center class="color-primary appname">Data</span>
+			</div>
+			<h4 class="subtitle color-primary" text-center>Login</h4>
+
+			<h6 class="topic color-primary" text-center>E-mail</h6>
+		
+			<div text-center>
+				<div class="inputbox" margin-bottom>
+					<ion-input #email autocomplete type="email" padding-horizontal placeholder="exemplo@email.com" class="inputs">
+					</ion-input>
+				</div>
+			</div>
+			<div text-center>
+				<p *ngIf="invalidEmail" class="errormessage">* e-mail inválido</p>
+				<p *ngIf="invalidUser" class="errormessage">* não existe uma conta cadastrada com esse e-mail</p>
+				<p *ngIf="disabledUser" class="errormessage">* essa conta foi desativada</p>
+			</div>
+
+			<h6 class="topic color-primary" text-center>Senha</h6>
+
+			<div text-center>
+				<div class="inputbox"> 
+					<ion-input #password type="password" padding-horizontal placeholder="******" class="inputs">
+					</ion-input>
+				</div>
+			</div>
+
+			<div text-center>
+				<p *ngIf="wrongPassw" class="errormessage">* senha incorreta</p>
+			</div>
+
+
+			<div text-center>
+				<ion-button type="submit" color="primary" round class="buttonslogin color-dark" (click)="signInUser()">
+					Entrar
+				</ion-button>
+				<p text-center class="texto color-secondary">Não tem uma conta?</p>
+				<ion-button color="primary" round class="buttonslogin color-dark" (click)="openRegisterPage()">
+					Cadastrar
+				</ion-button>
+			</div>
+		</ion-col>
+	</ion-grid>
+</ion-content>

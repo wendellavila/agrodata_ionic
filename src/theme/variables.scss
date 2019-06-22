@@ -2,13 +2,72 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
+//Quicksand
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Quicksand/Quicksand-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/Quicksand/Quicksand-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: lighter;
+  src: url('../assets/fonts/Quicksand/Quicksand-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: bolder;
+  src: url('../assets/fonts/Quicksand/Quicksand-Bold.ttf');
+}
+//Montserrat
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/Montserrat/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: lighter;
+  src: url('../assets/fonts/Montserrat/Montserrat-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: bolder;
+  src: url('../assets/fonts/Montserrat/Montserrat-Bold.ttf');
+}
+
+
+
 :root {
-  --ion-color-primary: #7AB846;
-  --ion-color-primary-rgb: 122,184,70;
+  --ion-color-primary: #89c643;
+  --ion-color-primary-rgb: 137,198,67;
   --ion-color-primary-contrast: #000000;
   --ion-color-primary-contrast-rgb: 0,0,0;
-  --ion-color-primary-shade: #6ba23e;
-  --ion-color-primary-tint: #87bf59;
+  --ion-color-primary-shade: #79ae3b;
+  --ion-color-primary-tint: #95cc56;
 
   --ion-color-secondary: #9A9A9A;
   --ion-color-secondary-rgb: 154,154,154;
@@ -17,19 +76,19 @@
   --ion-color-secondary-shade: #888888;
   --ion-color-secondary-tint: #a4a4a4;
 
-  --ion-color-tertiary: #569322;
-  --ion-color-tertiary-rgb: 86,147,34;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255,255,255;
-  --ion-color-tertiary-shade: #4c811e;
-  --ion-color-tertiary-tint: #679e38;
+  --ion-color-tertiary: #a9dc6a;
+  --ion-color-tertiary-rgb: 169,220,106;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0,0,0;
+  --ion-color-tertiary-shade: #95c25d;
+  --ion-color-tertiary-tint: #b2e079;
 
-  --ion-color-success: #bdfb8f;
-  --ion-color-success-rgb: 189,251,143;
+  --ion-color-success: #a9dc6a;
+  --ion-color-success-rgb: 169,220,106;
   --ion-color-success-contrast: #000000;
   --ion-color-success-contrast-rgb: 0,0,0;
-  --ion-color-success-shade: #a6dd7e;
-  --ion-color-success-tint: #c4fb9a;
+  --ion-color-success-shade: #95c25d;
+  --ion-color-success-tint: #b2e079;
 
   --ion-color-warning: #ffe77e;
   --ion-color-warning-rgb: 255,231,126;
@@ -45,12 +104,12 @@
   --ion-color-danger-shade: #e08888;
   --ion-color-danger-tint: #ffa4a4;
 
-  --ion-color-dark: #101010;
-  --ion-color-dark-rgb: 16,16,16;
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34,34,34;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255,255,255;
-  --ion-color-dark-shade: #0e0e0e;
-  --ion-color-dark-tint: #282828;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
 
   --ion-color-medium: #989aa2;
   --ion-color-medium-rgb: 152,154,162;
@@ -65,4 +124,23 @@
   --ion-color-light-contrast-rgb: 0,0,0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-white: #fff;
+  --ion-color-white-rgb: 255,255,255;
+  --ion-color-white-contrast: #fff;
+  --ion-color-white-contrast-rgb: 255,255,255;
+  --ion-color-white-shade: #f4f4f4;
+  --ion-color-white-tint: #fff;
+
+  --ion-font-family: 'Quicksand';
+  --ion-font-family: 'Montserrat';
 }
+
+.ion-color-white {
+  --ion-color-base: var(--ion-color-white) !important;
+  --ion-color-base-rgb: var(--ion-color-white-rgb) !important;
+  --ion-color-contrast: var(--ion-color-white-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-white-shade) !important;
+  --ion-color-tint: var(--ion-color-white-tint) !important;
+  }
