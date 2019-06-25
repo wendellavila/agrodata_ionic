@@ -32,7 +32,7 @@
     padding: 0px;
     display: inline-block;
     width: 100%;
-    border: 2px solid var(--ion-color-primary);;
+    border: 2px solid var(--ion-color-primary);
 }
 .title {
     margin: 5px;
@@ -80,7 +80,7 @@
     margin-top: 20px;
 }
 .errormessage {
-    color: red;
+    color: var(--ion-color-danger-tint);;
     padding-top: 0px;
     margin-top: 0px;
     padding-bottom: 3px;

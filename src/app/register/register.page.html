@@ -1,64 +1,75 @@
-<ion-content>
+<ion-content padding>
 	<div text-center no-margin>
-			<img src="../../assets/images/logo.png" class="logo">
+		<img src="../../assets/images/logo.png" class="logo">
+	</div>
+	<form [formGroup]="registerForm" text-center>
+		<h4 class="subtitle color-primary" text-center>Cadastro</h4>
+		<h6 class="topic color-primary" text-center>Nome</h6>
+		
+		<ion-item class="inputbox">
+			<ion-input formControlName="name" type="text" padding-horizontal placeholder="Seu Nome" class="inputs">
+			</ion-input>
+		</ion-item>
+
+		<ng-container *ngFor="let error of error_messages.password">          
+			<div class="errormessage" *ngIf="registerForm.get('name').hasError(error.type) && (registerForm.get('name').dirty || registerForm.get('name').touched)">
+				{{ error.message }}
+			</div>
+		</ng-container>
+		
+		<h6 class="topic color-primary" text-center>E-mail</h6>
+
+		<ion-item class="inputbox">
+			<ion-input formControlName="email" type="email" padding-horizontal placeholder="exemplo@email.com" class="inputs">
+			</ion-input>
+		</ion-item>
+
+		<ng-container *ngFor="let error of error_messages.password">          
+			<div class="errormessage" *ngIf="registerForm.get('email').hasError(error.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+				{{ error.message }}
+			</div>
+		</ng-container>
+
+		<!-- <p *ngIf="inUseEmail" class="errormessage">* já existe uma conta cadastrada com esse e-mail</p> -->
+
+		<h6 class="topic color-primary" text-center>Senha</h6>
+
+		<ion-item class="inputbox">
+			<ion-input formControlName="password" type="password" padding-horizontal placeholder="******" class="inputs">
+			</ion-input>
+		</ion-item>
+
+		<ng-container *ngFor="let error of error_messages.password">          
+			<div class="errormessage" *ngIf="registerForm.get('password').hasError(error.type) && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+				{{ error.message }}
+			</div>
+		</ng-container>
+
+		<h6 class="topic color-primary" text-center>Confirme sua senha</h6>
+
+		<ion-item class="inputbox">
+			<ion-input formControlName="confirmpassword" type="password" padding-horizontal placeholder="******" class="inputs">
+			</ion-input>
+		</ion-item>
+
+		<ng-container *ngFor="let error of error_messages.password">          
+			<div class="errormessage" *ngIf="registerForm.get('confirmpassword').hasError(error.type) && (registerForm.get('confirmpassword').dirty || registerForm.get('confirmpassword').touched)">
+				{{ error.message }}
+			</div>
+		</ng-container>
+
+		<!-- <p *ngIf="unmatchPassw" class="errormessage">* as senhas são diferentes</p> -->
+		
+		<div text-center>
+			<ion-button [disabled]="!registerForm.valid" type="submit" color="primary" class="buttonscadastrar" (click)="registerUser()">
+				Cadastrar
+			</ion-button>
 		</div>
-
-		<ion-grid>
-			<ion-col col-12>
-				<h4 class="subtitle color-primary" text-center>Cadastro</h4>
-
-				<h6 class="topic color-primary" text-center>Nome</h6>
-				
-				<div color="primary" class="inputbox">
-					<ion-input #name type="text" padding-horizontal placeholder="Seu Nome" class="inputs">
-					</ion-input>
-				</div>
-
-				<p *ngIf="emptyName" class="errormessage">* campo vazio</p> 
-				
-				<h6 class="topic color-primary" text-center>E-mail</h6>
-
-				<div color="primary" class="inputbox">
-					<ion-input #email type="email" padding-horizontal placeholder="exemplo@email.com" class="inputs">
-					</ion-input>
-				</div>
-
-				<p *ngIf="emptyEmail" class="errormessage">* campo vazio</p> 
-				<p *ngIf="invalidEmail" class="errormessage">* e-mail inválido</p>
-				<p *ngIf="inUseEmail" class="errormessage">* já existe uma conta cadastrada com esse e-mail</p>
-
-				<h6 class="topic color-primary" text-center>Senha</h6>
-				<h6 class="subtopic color-primary" text-center>(no mínimo 6 caracteres)</h6>
-
-				<div color="primary" class="inputbox">
-					<ion-input #password type="password" padding-horizontal placeholder="******" class="inputs">
-					</ion-input>
-				</div>
-
-				<p *ngIf="shortPassw" class="errormessage">* senha muito curta</p>
-				<p *ngIf="emptyPassw" class="errormessage">* campo vazio</p>
-				<h6 class="topic color-primary" text-center>Confirme sua senha</h6>
-
-
-				<div color="primary" class="inputbox" no-padding no-margin>
-					<ion-input #passwordcheck type="password" padding-horizontal placeholder="******" class="inputs">
-					</ion-input>
-				</div>
-
-				<p *ngIf="emptyPasswCheck" class="errormessage">* campo vazio</p>
-				<p *ngIf="unmatchPassw" class="errormessage">* as senhas são diferentes</p>
-				
-				<div text-center>
-					<ion-button type="submit" color="primary" class="buttonscadastrar" (click)="registerUser()">
-						Cadastrar
-					</ion-button>
-				</div>
-				<div text-center no-margin>
-					<ion-button icon-left class="buttonalterar" color="primary" text-center fill="outline" (click)="openLoginPage()">
-						<ion-icon name="arrow-back" color="primary"></ion-icon>
-						Cancelar
-					</ion-button>
-				</div>
-			</ion-col>
-		</ion-grid>
+		<div text-center no-margin>
+			<ion-button icon-left class="buttonalterar" color="primary" text-center fill="outline" (click)="openLoginPage()">
+				<ion-icon name="arrow-back" color="primary"></ion-icon>
+				Cancelar
+			</ion-button>
+		</div>
+	</form>
 </ion-content>
