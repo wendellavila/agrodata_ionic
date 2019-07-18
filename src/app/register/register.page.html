@@ -29,8 +29,8 @@
 				{{ error.message }}
 			</div>
 		</ng-container>
-
-		<!-- <p *ngIf="inUseEmail" class="errormessage">* já existe uma conta cadastrada com esse e-mail</p> -->
+	</form>
+	<form [formGroup]="passwordForm" text-center>
 
 		<h6 class="topic color-primary" text-center>Senha</h6>
 
@@ -40,7 +40,7 @@
 		</ion-item>
 
 		<ng-container *ngFor="let error of error_messages.password">          
-			<div class="errormessage" *ngIf="registerForm.get('password').hasError(error.type) && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+			<div class="errormessage" *ngIf="passwordForm.get('password').hasError(error.type) && (passwordForm.get('password').dirty || passwordForm.get('password').touched)">
 				{{ error.message }}
 			</div>
 		</ng-container>
@@ -52,16 +52,14 @@
 			</ion-input>
 		</ion-item>
 
-		<ng-container *ngFor="let error of error_messages.password">          
-			<div class="errormessage" *ngIf="registerForm.get('confirmpassword').hasError(error.type) && (registerForm.get('confirmpassword').dirty || registerForm.get('confirmpassword').touched)">
-				{{ error.message }}
-			</div>
-		</ng-container>
+		<div class="errormessage" *ngIf="!this.passwordForm.valid && (passwordForm.get('confirmpassword').dirty || passwordForm.get('confirmpassword').touched)">
+			* as senhas devem ser iguais
+		</div>
 
 		<!-- <p *ngIf="unmatchPassw" class="errormessage">* as senhas são diferentes</p> -->
 		
 		<div text-center>
-			<ion-button [disabled]="!registerForm.valid" type="submit" color="primary" class="buttonscadastrar" (click)="registerUser()">
+			<ion-button [disabled]="!registerForm.valid || !passwordForm.valid" type="submit" color="primary" class="buttonscadastrar" (click)="registerUser()">
 				Cadastrar
 			</ion-button>
 		</div>

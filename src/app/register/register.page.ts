@@ -3,7 +3,7 @@ import { LoadingController, ToastController, AlertController } from '@ionic/angu
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-//import { PasswordValidator } from '../../validators/password.validator';
+import { PasswordValidator } from '../../validators/password.validator';
 
 @Component({
   	selector: 'app-register',
@@ -13,6 +13,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class RegisterPage implements OnInit {
 
 	registerForm: FormGroup;
+	passwordForm: FormGroup;
 
 	error_messages = {
 		'name' : [
@@ -29,7 +30,7 @@ export class RegisterPage implements OnInit {
 		'confirmpassword' : [
 			{ type: 'required', message: '* campo vazio' },
 			{ type: 'minlength', message: '* senha deve ter no mínimo 6 caracteres' },
-			{ type: 'areEqual', message: '* as senhas devem ser iguais' }
+			{ type: 'notEqual', message: '* as senhas devem ser iguais' },
 		],
 	}
 
@@ -40,22 +41,27 @@ export class RegisterPage implements OnInit {
 			email: new FormControl('', Validators.compose([
 				Validators.required,
 				Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-			])),
+			]))
+		});
+		
+		this.passwordForm = new FormGroup({
 			password: new FormControl('', Validators.compose([
+				Validators.minLength(6),
 				Validators.required,
-				Validators.minLength(6)
 			])),
 			confirmpassword: new FormControl('', Validators.compose([
-				Validators.required,
 				Validators.minLength(6),
+				Validators.required,
 			]))
+		}, (formGroup: FormGroup) => {
+			 return PasswordValidator.areEqual(formGroup);
 		});
 	}
 
 	ngOnInit(){}
 	
 	openHomePage(){
-    	this.router.navigateByUrl('home');
+		this.router.navigateByUrl('home');
   	}
 
 	openLoginPage(){
@@ -106,9 +112,9 @@ export class RegisterPage implements OnInit {
   	registerUser(){
 		this.presentLoading();
 		this.afAuth.auth.createUserWithEmailAndPassword
-		(this.registerForm.value.email, this.registerForm.value.password)
+		(this.registerForm.value.email, this.passwordForm.value.password)
 		.then(data =>{
-			this.afAuth.auth.signInWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
+			this.afAuth.auth.signInWithEmailAndPassword(this.registerForm.value.email, this.passwordForm.value.password)
 			.then(data =>{
 				var user = this.afAuth.auth.currentUser;
 				user.updateProfile({
