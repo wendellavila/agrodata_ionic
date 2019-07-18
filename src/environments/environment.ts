@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyB538vmYHLU4VOywSQUdXOA5ygX8mQqG7s",
+    authDomain: "agrodata-app.firebaseapp.com",
+    databaseURL: "https://agrodata-app.firebaseio.com",
+    projectId: "agrodata-app",
+    storageBucket: "",
+    messagingSenderId: "538211569592"
+  }
+ };
 
 /*
  * For easier debugging in development mode, you can import the following file

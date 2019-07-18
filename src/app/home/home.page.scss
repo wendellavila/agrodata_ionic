@@ -48,3 +48,13 @@ ion-content{
 ion-grid {
     padding: 0%;
 }
+
+.img-plant {
+    width: 300px;
+}
+
+@media (min-width: 576px){
+    .img-plant {
+        width: 80px;
+    }
+}

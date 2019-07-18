@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   	selector: 'app-login',
@@ -22,7 +24,8 @@ export class LoginPage implements OnInit {
 		],
 	}
 
-  	constructor(private router: Router, public formBuilder: FormBuilder) { 
+	constructor(private router: Router, public formBuilder: FormBuilder, public afAuth: AngularFireAuth,
+	public loadingCtrl: LoadingController, public toastController: ToastController, public alertController: AlertController) { 
 		this.loginForm = this.formBuilder.group({
 			email: new FormControl('', Validators.compose([
 				Validators.required,
@@ -35,15 +38,80 @@ export class LoginPage implements OnInit {
 		});
 	}
 
-  	ngOnInit() {
+  	ngOnInit(){
   	}
   	openRegisterPage() {
     	this.router.navigateByUrl('register');
+	}
+	openHomePage(){
+    	this.router.navigateByUrl('home');
   	}
   	signInUser(){
-		console.log(this.loginForm.value.password);
-		console.log(this.loginForm.value.email);
-		this.router.navigateByUrl('home');
-  	}
+		this.presentLoading();
+		this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
+		.then(data =>{
+			this.loadingCtrl.dismiss();
+			this.openHomePage();
+			this.presentToast();
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			if (errorCode == 'auth/user-not-found') {
+				this.loadingCtrl.dismiss();
+				this.alertErrorLogin();
+			}
+			if (errorCode == 'auth/wrong-password') {
+				this.loadingCtrl.dismiss();
+				this.alertErrorLogin();
+			}
+			if (errorCode == 'auth/network-request-failed'){
+				this.loadingCtrl.dismiss();
+				this.alertErrorInternet();
+			}
+			this.loadingCtrl.dismiss();
+			console.log(error.code);
+		})
+	}
+
+	async alertErrorLogin() {
+		const alert = await this.alertController.create({
+		  header: 'Erro',
+		  subHeader: 'Não foi possível entrar',
+		  message: 'Confira seu email e senha e tente novamente.',
+		  buttons: ['OK']
+		});
+	
+		await alert.present();
+	}
+
+	async alertErrorInternet() {
+		const alert = await this.alertController.create({
+		  header: 'Erro',
+		  subHeader: 'Não foi possível conectar à internet',
+		  message: 'Verifique sua conexão e tente novamente.',
+		  buttons: ['OK']
+		});
+	
+		await alert.present();
+	}
+
+	async presentToast() {
+		const toast = await this.toastController.create({
+		  header: 'Bem vindo!',
+		  showCloseButton: false,
+		  position: 'top',
+		  duration: 2000
+		});
+		toast.present();
+	}
+	
+	async presentLoading() {
+		const loading = await this.loadingCtrl.create({
+		  message: 'Aguarde...',
+		  translucent: true
+		});
+		return await loading.present();
+	}
+
 
 }
