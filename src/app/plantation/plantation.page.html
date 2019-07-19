@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-toolbar color="white">
+		<ion-row>
+			<ion-col size="2">
+				<ion-button (click)="openHomePage()" color="white" fill="outline">
+					<ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+				</ion-button>
+			</ion-col>
+			<ion-col size="10">
+				<div class="color-primary plantation-type" text-center>{{ getPlantationType() }}</div>
+			</ion-col>
+		</ion-row>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div text-center class="members bg-white" *ngFor="let member of members">
+		<h4 class="color-primary">{{ getUsername(member.uid) }}</h4>
+		<h5 class="color-secondary">{{ getEmail(member.uid) }}</h5>
+		<h6 class="color-medium">{{ getPlantationOwnership(member.uid) }}</h6>
+	</div>
+</ion-content>

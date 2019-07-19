@@ -3,6 +3,7 @@ import { LoadingController, ToastController, AlertController } from '@ionic/angu
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { PasswordValidator } from '../../validators/password.validator';
 
 @Component({
@@ -34,7 +35,7 @@ export class RegisterPage implements OnInit {
 		],
 	}
 
-	constructor(private router: Router, public formBuilder: FormBuilder, public afAuth: AngularFireAuth,
+	constructor(private router: Router, public formBuilder: FormBuilder, public afAuth: AngularFireAuth, public db: AngularFireDatabase,
 	public loadingCtrl: LoadingController, public toastController: ToastController, public alertController: AlertController) { 
 		this.registerForm = this.formBuilder.group({
 			name: new FormControl('', Validators.required),
@@ -59,6 +60,8 @@ export class RegisterPage implements OnInit {
 	}
 
 	ngOnInit(){}
+
+	/*================================= navegação entre páginas ===================================== */
 	
 	openHomePage(){
 		this.router.navigateByUrl('home');
@@ -75,6 +78,8 @@ export class RegisterPage implements OnInit {
 		});
 		return await loading.present();
 	}
+
+	/*================================= interacoes com o usuario ===================================== */
 
 	async presentToast() {
 		const toast = await this.toastController.create({
@@ -109,6 +114,8 @@ export class RegisterPage implements OnInit {
 		await alert.present();
 	}
 
+	/*========================================== cadastro ============================================ */
+
   	registerUser(){
 		this.presentLoading();
 		this.afAuth.auth.createUserWithEmailAndPassword
@@ -121,6 +128,11 @@ export class RegisterPage implements OnInit {
 					displayName: this.registerForm.value.name,
 					photoURL: "https://static.thenounproject.com/png/363639-200.png"
 				}).then(data =>{
+					this.db.database.ref("/users/" + user.uid).set({
+						email: user.email,
+						username: user.displayName,
+						photo: user.photoURL,
+					});
 					this.loadingCtrl.dismiss();
 					this.openHomePage();
 					this.presentToast();

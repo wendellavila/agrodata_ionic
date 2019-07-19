@@ -39,39 +39,18 @@ export class LoginPage implements OnInit {
 	}
 
   	ngOnInit(){
-  	}
+	}
+	
+	/*================================= navegação entre páginas ===================================== */
+
   	openRegisterPage() {
     	this.router.navigateByUrl('register');
 	}
 	openHomePage(){
     	this.router.navigateByUrl('home');
-  	}
-  	signInUser(){
-		this.presentLoading();
-		this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
-		.then(data =>{
-			this.loadingCtrl.dismiss();
-			this.openHomePage();
-			this.presentToast();
-		})
-		.catch(error => {
-			const errorCode = error.code;
-			if (errorCode == 'auth/user-not-found') {
-				this.loadingCtrl.dismiss();
-				this.alertErrorLogin();
-			}
-			if (errorCode == 'auth/wrong-password') {
-				this.loadingCtrl.dismiss();
-				this.alertErrorLogin();
-			}
-			if (errorCode == 'auth/network-request-failed'){
-				this.loadingCtrl.dismiss();
-				this.alertErrorInternet();
-			}
-			this.loadingCtrl.dismiss();
-			console.log(error.code);
-		})
 	}
+	  
+	/*================================= interacoes com o usuario ===================================== */
 
 	async alertErrorLogin() {
 		const alert = await this.alertController.create({
@@ -113,5 +92,34 @@ export class LoginPage implements OnInit {
 		return await loading.present();
 	}
 
+	/*============================================ login ============================================== */
 
+  	signInUser(){
+		this.presentLoading();
+		this.afAuth.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
+		.then(data =>{
+			this.loadingCtrl.dismiss();
+			this.openHomePage();
+			this.presentToast();
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			if (errorCode == 'auth/user-not-found') {
+				this.loadingCtrl.dismiss();
+				this.alertErrorLogin();
+			}
+			if (errorCode == 'auth/wrong-password') {
+				this.loadingCtrl.dismiss();
+				this.alertErrorLogin();
+			}
+			if (errorCode == 'auth/network-request-failed'){
+				this.loadingCtrl.dismiss();
+				this.alertErrorInternet();
+			}
+			this.loadingCtrl.dismiss();
+			console.log(error.code);
+		})
+	}
+
+	
 }

@@ -10,19 +10,20 @@
 
 <ion-content class="body-background">
   	<div class="ion-padding">
-		<ion-button expand="block" color="white" class="buttons">
+		<ion-button expand="block" color="white" class="buttons" (click)="createPlantation()">
 			<ion-icon name="add" class="color-primary add-icon"></ion-icon>
 			<p class="color-primary">Adicionar Plantação</p>
 		</ion-button>
-		<ion-button expand="block" color="white" class="buttons">
+		<ion-button expand="block" color="white" class="buttons" *ngFor="let plantation of plantations" (click)="openPlantationPage(plantation.plantationId)">
+			{{ getPlantationId(plantation.plantationId) }}
 			<ion-grid>
 				<ion-row>
 					<ion-col size="8">
-						<p class="color-primary card-header">Milho</p>
+						<p class="color-primary card-header">{{ getPlantationType() }}</p>
 						<p class="color-medium card-subtitle">Editar Dados</p>
 					</ion-col>
 					<ion-col size="4">
-						<img src="http://placehold.it/300" alt="" class="img-plant">
+						<img src="{{getPlantationImg()}}" alt="" class="img-plant">
 					</ion-col>
 				</ion-row>
 			</ion-grid>
