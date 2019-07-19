@@ -7,8 +7,6 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'plantation', loadChildren: './plantation/plantation.module#PlantationPageModule' },
-  { path: 'plantation-modal', loadChildren: './plantation-modal/plantation-modal.module#PlantationModalPageModule' },
-  { path: 'plantation-popover', loadChildren: './plantation-popover/plantation-popover.module#PlantationPopoverPageModule' },
 ];
 
 @NgModule({
