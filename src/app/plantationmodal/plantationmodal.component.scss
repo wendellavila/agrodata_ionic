@@ -1,0 +1,11 @@
+.color-dark {
+    color: var(--ion-color-dark);
+}
+.buttonslogin {
+    width: 80%;
+}
+@media (min-width: 576px){
+    .buttonslogin {
+        width: 40%;
+    }
+}

@@ -1,0 +1,37 @@
+<div text-center>
+	<ion-list>
+		<ion-radio-group allow-empty-selection = "false" name="radio-group" #radioGroup>
+			<ion-list-header>
+				<ion-label>Cultura</ion-label>
+			</ion-list-header>
+
+			<ion-item>
+				<ion-label>Milho</ion-label>
+				<ion-radio slot="start" value="Milho" checked></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>Laranja</ion-label>
+				<ion-radio slot="start" value="Laranja"></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>Feijão</ion-label>
+				<ion-radio slot="start" value="Feijão"></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>Cana-de-açúcar</ion-label>
+				<ion-radio slot="start" value="Cana-de-açúcar"></ion-radio>
+			</ion-item>
+
+			<ion-item>
+				<ion-label>Café</ion-label>
+				<ion-radio slot="start" value="Café"></ion-radio>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+	<ion-button color="primary" round class="buttonslogin color-dark" (click)="add()">
+		Adicionar
+	</ion-button>
+</div>

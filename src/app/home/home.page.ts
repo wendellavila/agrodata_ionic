@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { LoadingController, ToastController, AlertController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController, ModalController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { PlantationmodalComponent } from '../plantationmodal/plantationmodal.component';
+
 
 @Component({
 	selector: 'app-home',
@@ -18,8 +20,9 @@ export class HomePage {
 	subscription;
 	currentLoading = null;
 
-	constructor(private router: Router, public afAuth: AngularFireAuth, public db: AngularFireDatabase, public loadingCtrl: LoadingController,
-	public toastController: ToastController, public alertController: AlertController) {
+	constructor(private router: Router, public afAuth: AngularFireAuth, public db: AngularFireDatabase,
+	public loadingCtrl: LoadingController, public toastController: ToastController,
+	public alertController: AlertController, public modalController: ModalController) {
 		this.user = this.afAuth.auth.currentUser;
 		this.uid = this.user.uid;
 		this.subscription = this.db.list("/users/" + this.uid + "/plantations/").valueChanges().subscribe(data => {
@@ -37,6 +40,10 @@ export class HomePage {
 		};
 		
 		this.router.navigate(['plantation'], navigationExtras);
+	}
+
+	openLoginPage(){
+    	this.router.navigateByUrl('login');
 	}
 
 	/*================================= interacoes com o usuario ===================================== */
@@ -58,6 +65,36 @@ export class HomePage {
 		  translucent: true
 		});
 		return await loading.present();
+	}
+
+	async presentModal(){
+		const modal = await this.modalController.create({
+			component: PlantationmodalComponent
+		});
+
+		modal.onDidDismiss()
+		.then((data) => {
+			const selection = data['data'];
+			console.log(selection);
+			this.createPlantation(selection);
+		});
+
+		modal.present();
+	}
+
+	disconnect(){
+		this.afAuth.auth.signOut()
+		.then((data) => {
+			this.openLoginPage();
+		})
+		.catch(error => {
+			const errorCode = error.code;
+			this.loadingCtrl.dismiss();
+			console.log(errorCode);
+			if(errorCode == 'auth/network-request-failed'){
+			   this.alertErrorInternet();
+			}
+		});
 	}
 
 	/*============================== exibir dados do banco no html ================================== */
@@ -86,18 +123,23 @@ export class HomePage {
  
 	/*======================================= criar plantacao ======================================== */
 
-	createPlantation(){
+	createPlantation(type){
 		var id = this.generateid();
-		var type = "Milho";
 		var img;
 		if(type == "Milho"){
-			img = "http://placehold.it/300";
+			img = "https://s3.amazonaws.com/virtuaria-h01/wp-content/uploads/sites/46/2018/11/29081726/acf6686a93225dbe7b1da31c202fb7c1-300x300.jpg";
 		}
 		else if(type == "Café"){
-			img = "http://placehold.it/300";
+			img = "http://www.elchaco.info/wp-content/uploads/2017/07/tazas-con-café-300x300.jpg";
 		}
-		else if(type == "Soja"){
-			img = "http://placehold.it/300";
+		else if(type == "Laranja"){
+			img = "https://petiscos.jp/wp-content/uploads/2012/07/laranja-300x300.jpg";
+		}
+		else if(type == "Cana-de-açúcar"){
+			img = "http://sabri.com.br/wp-content/uploads/2018/10/5812126_x720-300x300.jpg";
+		}
+		else if(type == "Feijão"){
+			img = "https://www.diarioinduscom.com/wp-content/uploads/2019/07/feijao-rajado-diarioindusco-300x300.jpg";
 		}
 		else {
 			img = "http://placehold.it/300";

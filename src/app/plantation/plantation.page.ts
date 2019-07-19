@@ -18,9 +18,9 @@ export class PlantationPage implements OnInit {
 	members : Object[] = [];
 	subscription;
 
-	constructor(private route: ActivatedRoute, private router: Router, public formBuilder: FormBuilder, public afAuth: AngularFireAuth,
-	public db: AngularFireDatabase, public loadingCtrl: LoadingController,
-	public toastController: ToastController,public alertController: AlertController) {
+	constructor(private route: ActivatedRoute, private router: Router, public formBuilder: FormBuilder,
+	public afAuth: AngularFireAuth, public db: AngularFireDatabase, public loadingCtrl: LoadingController,
+	public toastController: ToastController,public alertController: AlertController){
 		this.route.queryParams.subscribe((params) =>{
 			if(params && params.plantationId){
 				this.id = params.plantationId;

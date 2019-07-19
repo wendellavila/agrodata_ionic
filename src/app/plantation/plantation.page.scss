@@ -23,12 +23,21 @@ ion-content{
     margin-top: 1%;
 }
 
+.add-icon {
+    padding-right: 2%;
+}
+.buttons {
+    margin: 3%;
+    height: 15vh;
+}
+
 .members {
     padding-top: 2%;
     padding-bottom: 2%;
     margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+    border: 2px solid var(--ion-color-primary);
 }
 
 h4, h5, h6 {

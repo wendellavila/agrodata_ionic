@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content class="body-background">
-  	<div class="ion-padding">
-		<ion-button expand="block" color="white" class="buttons" (click)="createPlantation()">
+  	<div class="ion-padding" text-center>
+		<ion-button expand="block" color="white" class="buttons" (click)="presentModal()">
 			<ion-icon name="add" class="color-primary add-icon"></ion-icon>
 			<p class="color-primary">Adicionar Plantação</p>
 		</ion-button>
@@ -27,6 +27,10 @@
 					</ion-col>
 				</ion-row>
 			</ion-grid>
+		</ion-button>
+		<ion-button color="white" class="disconnect-button" (click)="disconnect()">
+			<ion-icon name="log-out" class="color-medium"></ion-icon>
+			<p class="color-medium">Desconectar</p>
 		</ion-button>
   	</div>
 </ion-content>
